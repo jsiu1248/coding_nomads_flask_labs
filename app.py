@@ -39,5 +39,9 @@ def link_page():
 # export FLASK_DEBUG=1
 #testing if pushing to github
 
+#two dynamic arguments in a view function name and age
+# make another funciton that takes numeric dymnaic and return the square
+# dynamic argument with spaces
+
 if __name__ == 'main':
     app.run(host='0.0.0.0', debug=True, port=5000)
