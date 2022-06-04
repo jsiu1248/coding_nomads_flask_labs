@@ -11,22 +11,24 @@ app=Flask(__name__)
 
 #handler
 def index():
-    return "Hello World"
+    return "Hello World.. Is this actually working?"
 
-@app.route('about')
+@app.route('/about')
 def about():
     page='I hope to make either another golf related app or I wish to make the app that I have done cooler.'
     return page
 
-@app.route('songs')
+#testing html for words
+@app.route('/songs')
 def songs():
     page='<li> Memories</li> <strong> Another</strong>'
     return page
 
-@app.route('link_page')
+# figured out how to make a link and reroute it
+@app.route('/link_page')
 def link_page():
     page='<a href="/about">Link to songs</a> <a href="/songs">Link to about</a>'
-    return "John"
+    return page
 
 # trying to run the app with
 # run "export FLASK_APP=app.py" in the terminal
@@ -37,4 +39,5 @@ def link_page():
 # export FLASK_DEBUG=1
 #testing if pushing to github
 
-
+if __name__ == 'main':
+    app.run(host='0.0.0.0', debug=True, port=5000)
