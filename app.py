@@ -40,8 +40,15 @@ def link_page():
 #testing if pushing to github
 
 #two dynamic arguments in a view function name and age
+@app.route('/user/<name>/<age>')
+def user(name, age):
+    return f"Hello, {name} are you {age} years old?!"
 # make another funciton that takes numeric dymnaic and return the square
+@app.route('/number/<num>')
+def number(num):
+    return f"{int(num)**2}"
 # dynamic argument with spaces
+
 
 if __name__ == 'main':
     app.run(host='0.0.0.0', debug=True, port=5000)
