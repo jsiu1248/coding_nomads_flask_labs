@@ -35,5 +35,6 @@ def link_page():
 
 # You can turn on the debugger and it can be reloader - which reloads as you go or debugger -
 # export FLASK_DEBUG=1
+#testing if pushing to github
 
 
