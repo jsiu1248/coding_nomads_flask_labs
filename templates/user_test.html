@@ -1,1 +1,6 @@
-<h1>"Hello it is I, {{username}}"</h1>
+{% if username %}
+    <h1>"Hello it is I, {{username}}"</h1>
+
+{% else %}
+    <h1>"What is your name?"</h1>
+{% endif %}

@@ -24,6 +24,12 @@ def songs():
     page='<li> Memories</li> <strong> Another</strong>'
     return page
 
+@app.route('/song')
+def song():
+    song=['Memories','Chicken Fried', 'Another']
+    return render_template('song.html', favorite_songs=song)
+
+
 # figured out how to make a link and reroute it
 @app.route('/link_page')
 def link_page():
@@ -54,6 +60,10 @@ def number(num):
 @app.route('/users/<username>')
 def users(username):
     return render_template('user_test.html', username=username)
+
+@app.route('/derived')
+def derived():
+    return render_template('derived.html') 
 
 if __name__ == 'main':
     app.run(host='0.0.0.0', debug=True, port=5000)
