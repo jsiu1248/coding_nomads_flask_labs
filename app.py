@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 #app is an instance of a Flask object
 # generally the __name__ passed as argument is correct
@@ -49,6 +49,11 @@ def number(num):
     return f"{int(num)**2}"
 # dynamic argument with spaces
 
+#when creating the templates folder. Make sure it is named templates and not template
+
+@app.route('/users/<username>')
+def users(username):
+    return render_template('user_test.html', username=username)
 
 if __name__ == 'main':
     app.run(host='0.0.0.0', debug=True, port=5000)
