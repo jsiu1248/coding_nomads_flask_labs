@@ -1,8 +1,12 @@
 <html>
 <head>
-    <title>{% block title %} {% endblock %} Trying to Make a New App</title>
+    {% block head %}
+    <title>{% block title %} {% endblock %} Trying to Make a New App</title> {# initial title for page#}
+    {% endblock%}
 </head>
 <body>
+        {%block body%}
+        {%endblock%}
 </body>
 
 </html>
