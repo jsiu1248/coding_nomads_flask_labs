@@ -1,8 +1,14 @@
 from flask import Flask, render_template
+from flask import flask_bootstrap import Bootstrap
+
 
 #app is an instance of a Flask object
 # generally the __name__ passed as argument is correct
 app=Flask(__name__)
+
+#it is initalized by passing in the flask_bootstrap instance
+#so here app is passed into the constructor
+bootstrap=Bootstrap(app)
 
 # decorator
 # whenever someone visits root url then call index()
