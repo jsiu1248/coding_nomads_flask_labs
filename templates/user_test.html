@@ -1,6 +1,31 @@
-{% if username %}
-    <h1>"Hello it is I, {{username}}"</h1>
+ {% extends "base.html"%} 
+ {% block title %}
+    {{super()}}
+    {% if username1 %}
+        User {{ username1 }}
+    {% endif %}
+{% endblock title%} 
+
+ {% block navbar %}
+    {{ super() }}
+{% endblock navbar %}
+
+{% block content %}
+    <h1>
+        {% if username1 %}
+            Hello, {{ username1 }}!
+        {% else %}
+            What is your name?
+        {% endif %}
+    </h1>
+{% endblock %} 
+
+
+{% block page_content %}
+{% if username1 %}
+    <h1>"Hello it is I, {{username1}}"</h1>
 
 {% else %}
     <h1>"What is your name?"</h1>
 {% endif %}
+{% endblock%}

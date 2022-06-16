@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask import flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 
 
 #app is an instance of a Flask object
@@ -17,7 +17,9 @@ bootstrap=Bootstrap(app)
 
 #handler
 def index():
-    return "Hello World.. Is this actually working?"
+    # return "Hello World.. Is this actually working?"
+    return render_template('index.html')
+
 
 @app.route('/about')
 def about():
@@ -51,6 +53,8 @@ def link_page():
 # export FLASK_DEBUG=1
 #testing if pushing to github
 
+#export FLASK_ENV=development
+
 #two dynamic arguments in a view function name and age
 @app.route('/user/<name>/<age>')
 def user(name, age):
@@ -65,11 +69,11 @@ def number(num):
 
 @app.route('/users/<username>')
 def users(username):
-    return render_template('user_test.html', username=username)
+    return render_template('user_test.html', username1=username)
 
 @app.route('/derived')
 def derived():
-    return render_template('derived.html') 
+    return render_template('derived.html')
 
-if __name__ == 'main':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5000)
