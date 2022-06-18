@@ -15,13 +15,20 @@
             </ul>
         </nav>
     </header>
+
     <section id="pageContent">
         <main role="main">
             {# Here is what each costume listing should look like in HTML #}
             <article>
-                <h2>Skeleton</h2>
-                <img class="costume" src='/static/skeleton.jpg'>
-                <p>This style is great if you are feeling something extra spooky for your pooch.</p>
+                {% for dict_item in costumes_list%}
+                    {% for key, value in dict_item.items()%}
+                        <h2>{{header_item}}</h2>
+
+                        <img class="costume" src=''>
+
+                <p>{{body_item}}</p>
+                    {%endfor%}
+                {%endfor%}
             </article>
             {# then the next costume, then the next... #}
             {# How can you list all of the costumes (in app.py) using Jinja? #}
