@@ -22,11 +22,16 @@
             <article>
                 {% for dict_item in costumes_list%}
                     {% for key, value in dict_item.items()%}
-                        <h2>{{header_item}}</h2>
+                        {% if key == "header"%}
+                        <h2>{{value}}</h2>
+                        {% endif%}
 
-                        <img class="costume" src=''>
-
-                <p>{{body_item}}</p>
+                        {% if key == "image"%}
+                        <img class="costume" src={{value}}>
+                        {%endif%}
+                        {% if key=="body"%}
+                            <p>{{value}}</p>
+                        {%endif%}
                     {%endfor%}
                 {%endfor%}
             </article>
