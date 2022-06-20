@@ -75,5 +75,11 @@ def users(username):
 def derived():
     return render_template('derived.html')
 
+@app.errorhandler(404)
+def page_not_found(e):
+    error_title = "Not Found"
+    error_msg= "That page doesn't exist."
+    return render_template('error.html', error_title=error_title, error_msg=error_msg),404 # why is there just a number here 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5000)
