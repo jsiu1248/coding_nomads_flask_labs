@@ -6,6 +6,10 @@ from flask_bootstrap import Bootstrap
 # generally the __name__ passed as argument is correct
 app=Flask(__name__)
 
+# Flask object has dictionary built in for config variables
+#will store this at a safer place later
+app.config['SECRET_KEY'] = "keep it secret, keep it safe"
+
 #it is initalized by passing in the flask_bootstrap instance
 #so here app is passed into the constructor
 bootstrap=Bootstrap(app)
