@@ -1,6 +1,14 @@
+from wsgiref.validate import validator
 from flask import Flask, render_template, abort
 from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
+class NameForm(FlaskForm):
+    # the validator is needed because a string is required
+    name = StringField("What is your name?", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 #app is an instance of a Flask object
 # generally the __name__ passed as argument is correct
@@ -22,6 +30,8 @@ bootstrap=Bootstrap(app)
 #handler
 def index():
     # return "Hello World.. Is this actually working?"
+    #shows the form
+    form = NameForm()
     return render_template('index.html')
 
 
