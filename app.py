@@ -108,6 +108,7 @@ def forbidden(e):
 def internal_server_error(e):
     error_title = "Internal Server Error"
     error_msg = "Sorry, we seem to be experiencing some technical difficulties"
+    # this is because of a flask response object that 500 is just a parameter
     return render_template('error.html',
                            error_title=error_title,
                            error_msg=error_msg), 500
