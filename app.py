@@ -25,14 +25,19 @@ bootstrap=Bootstrap(app)
 # decorator
 # whenever someone visits root url then call index()
 
-@app.route('/')
+# adding methods that it accepts
+@app.route('/', methods=['GET','POST'] )
 
 #handler
 def index():
     # return "Hello World.. Is this actually working?"
     #shows the form
     form = NameForm()
-    return render_template('index.html', form=form)
+    name=None
+    if form.validate_on_submit():
+        name=form.name.data
+        form.name.date=""
+    return render_template('index.html', form=form, name=name)
 
 
 @app.route('/about')

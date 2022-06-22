@@ -7,13 +7,18 @@
 
 {% block title%} {{super()}} Home {% endblock%}
 {%block page_content %}
-<h1> Hello World</h1>
-
+<h1> Hello World
+{% if name %}{{name}}{% else %}Anonymous{% endif %}!</h1>
+<p>Enjoy your stay.</p>
 {#<form method="POST">
     hides some of the sensitive things for user
+    Flask-WTF to implement CSRF protection
     {{form.hidden_tag()}}
+    the label is rendered and then it is called
     {{form.name.label}} {{form.name(id='my-field-id')}}
     {{form.submit()}}
+    quick form allows a form to be quick and looks modern
+    pre-defined CSS
 #}
 
 {{wtf.quick_form(form)}}
@@ -38,10 +43,10 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock navbar%}
 
 
-{% endblock%}
+{% endblock page_content%}
 {# Do comments actually work? Why is it showing up?#}
 {# The comments with the <!--  are still showing up with the exetension-->#}
 {#{% extends 'bootstrap/base.html' %}
