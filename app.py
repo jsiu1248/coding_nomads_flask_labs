@@ -32,7 +32,7 @@ def index():
     # return "Hello World.. Is this actually working?"
     #shows the form
     form = NameForm()
-    return render_template('index.html')
+    return render_template('index.html', form=form)
 
 
 @app.route('/about')
