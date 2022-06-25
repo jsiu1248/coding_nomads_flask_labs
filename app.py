@@ -1,5 +1,5 @@
 from wsgiref.validate import validator
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, url_for, redirect, session, flash
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -33,11 +33,16 @@ def index():
     # return "Hello World.. Is this actually working?"
     #shows the form
     form = NameForm()
-    name=None
+    # name=None # we need a session variable now instead
     if form.validate_on_submit():
-        name=form.name.data
+        session['name']= form.name.data
+
+        # name=form.name.data # we can clear the line because it already gets cleared
         form.name.date=""
-    return render_template('index.html', form=form, name=name)
+        #whenever a post function happens then you can go back to get function so it doesn't error
+        flash('Please enjoy this place!')
+        return redirect(url_for('index'))
+    return render_template('index.html', form=form, name=session.get('name'))
 
 
 @app.route('/about')
