@@ -56,6 +56,10 @@ def songs():
     page='<li> Memories</li> <strong> Another</strong>'
     return page
 
+@app.route('/zodiac')
+def zodiac():
+    return render_template('zodiac.html')
+
 @app.route('/song')
 def song():
     song=['Memories','Chicken Fried', 'Another']
