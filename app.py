@@ -1,14 +1,18 @@
+from datetime import date
 from wsgiref.validate import validator
 from flask import Flask, render_template, abort, url_for, redirect, session, flash
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, DateField
 from wtforms.validators import DataRequired
 
 class NameForm(FlaskForm):
     # the validator is needed because a string is required
     name = StringField("What is your name?", validators=[DataRequired()])
+    #stores as a datetime.date
+    form_birthday = DateField("What is your birthday?", format='%Y-%m-%d', validators=[DataRequired()])
     submit = SubmitField("Submit")
+
 
 #app is an instance of a Flask object
 # generally the __name__ passed as argument is correct
@@ -38,7 +42,7 @@ def index():
         session['name']= form.name.data
 
         # name=form.name.data # we can clear the line because it already gets cleared
-        form.name.date=""
+        form.name.data=""
         #whenever a post function happens then you can go back to get function so it doesn't error
         flash('Please enjoy this place!')
         return redirect(url_for('index'))
@@ -58,7 +62,19 @@ def songs():
 
 @app.route('/zodiac')
 def zodiac():
-    return render_template('zodiac.html')
+    form = NameForm()
+    if form.validate_on_submit():
+        session['name']= form.name.data
+        form.name.data=""
+        flash("hihi")
+        print(form.form_birthday)
+    #     if form.form_birthday == date.datetime(1992,1,24):
+    #         flash("hihi")
+    #         #return form.dt.data.strftime('%Y-%m-%d')
+    #         return redirect(url_for('zodiac'))
+
+    # return render_template('zodiac.html', form=form, name=session.get('name'), form_birthday=session.get('form_birthday'))
+
 
 @app.route('/song')
 def song():
