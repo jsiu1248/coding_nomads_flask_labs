@@ -1,11 +1,16 @@
-<head>
-    <title>Emily's Dog Costumes - My Costumes</title>
+{% extends 'base.html' %}
+
+<head>{%block head%}
+    <title>{% block title %}Emily's Dog Costumes - My Costumes {%endblock title%}</title>
     <meta name="description" content="Emily's Dog Costumes">
     <link rel="stylesheet" href="static/style.css">
+    {%endblock head%}
+
 </head>
 
 <body>
     <header>
+        {%block header %}
         <div id="logo"><img src="static/logo.png"><h1>Emily's Dog Costumes</h1></div>
         <nav>
             <ul>
@@ -14,10 +19,13 @@
                 <li><a href="/costumes">Costumes</a>
             </ul>
         </nav>
+        {%endblock header %}
     </header>
 
     <section id="pageContent">
+        {%block pagecontent %}
         <main role="main">
+            {%block content %}
             {# Here is what each costume listing should look like in HTML #}
             <article>
                 {% for dict_item in costumes_list%}
@@ -37,12 +45,17 @@
             </article>
             {# then the next costume, then the next... #}
             {# How can you list all of the costumes (in app.py) using Jinja? #}
+            {% endblock content %}
         </main>
+    {% endblock pagecontent %}
+
     </section>
     <footer>
+        {%block footer%}
         <p>&copy; All rights reserved to Emily, Dog Costume Extraordinaire</p>
         <address>
             Contact: <a href="mailto:emily@example.com">Emily, Dog Costumer</a>
         </address>
+        {% endblock footer %}
     </footer>
 </body>

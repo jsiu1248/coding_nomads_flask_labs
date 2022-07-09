@@ -1,7 +1,9 @@
 {% extends 'bootstrap/base.html' %}
-{% block head%} {% endblock%}
-{% block title %}{% endblock %}
-{%block content %}{% endblock%}
-{% block page_content %} {% endblock%}
-{% block footer %} {% endblock%}
+{% block head%} {{super()}} {% endblock%}
+{% block title %} {{super()}} {% endblock %}
+{%block content %} {{super()}} {% endblock%}
+{% block page_content %} {{super()}} {% endblock%}
+{% block footer %} {{super()}}  {% endblock%}
+{% block header%} {%endblock header%}
 
+{# NOTE: your other files have to have all of the blocks or else it would be blank#}
