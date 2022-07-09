@@ -66,14 +66,16 @@ def zodiac():
     if form.validate_on_submit():
         session['name']= form.name.data
         form.name.data=""
+        session['form_birthday']= form.form_birthday.data
+        form.form_birthday.data=""
+
         flash("hihi")
-        print(form.form_birthday)
     #     if form.form_birthday == date.datetime(1992,1,24):
     #         flash("hihi")
     #         #return form.dt.data.strftime('%Y-%m-%d')
-    #         return redirect(url_for('zodiac'))
+        return redirect(url_for('zodiac'))
 
-    # return render_template('zodiac.html', form=form, name=session.get('name'), form_birthday=session.get('form_birthday'))
+    return render_template('zodiac.html', form=form, name=session.get('name'), form_birthday=session.get('form_birthday'))
 
 
 @app.route('/song')
