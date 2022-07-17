@@ -1,38 +1,27 @@
 {% extends 'bootstrap/base.html' %}
-{% block head%} {{super()}} {% endblock%}
-{% block title %} {{super()}} {% endblock %}
-{%block content %} {{super()}} {% endblock%}
-{% block page_content %} {{super()}} {% endblock%}
-{% block footer %} {{super()}}  {% endblock%}#}
-{% block header %}
 
 {% block navbar %}
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">WebSiteName</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
-      </div>
+<div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Welcome</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a>
+                    <li><a href="/services">Services</a>
+                    <li><a href="/costumes">Costumes</a>
+            </ul>
+        </div>
     </div>
-  </nav>
+</div>
 
-{% endblock %}
-{%endblock header%}
+{% endblock navbar %}
 
 {# NOTE: your other files have to have all of the blocks or else it would be blank#}
