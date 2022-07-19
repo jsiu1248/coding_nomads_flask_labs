@@ -145,6 +145,13 @@ def internal_server_error(e):
                            error_title=error_title,
                            error_msg=error_msg), 500
 
+def zodiac(date):
+    """Find zodiac animal based on birth year.
+    The input is a datetime object and the output is a string."""
+
+    zodiac_dict = {"Rat":1948, "Ox":1949, "Tiger":1950, "Rabbit":1951, "Dragon":1952,
+    "Snake":1953, "Horse":1954, "Goat":1955, "Monkey":1956, "Rooster":1957, "Dog":1958,"Pig":1959}
+
 
 
 if __name__ == '__main__':
