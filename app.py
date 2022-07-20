@@ -145,14 +145,28 @@ def internal_server_error(e):
                            error_title=error_title,
                            error_msg=error_msg), 500
 
-def zodiac(date):
+def zodiac(user_date):
     """Find zodiac animal based on birth year.
     The input is a datetime object and the output is a string."""
 
     zodiac_dict = {"Rat":1948, "Ox":1949, "Tiger":1950, "Rabbit":1951, "Dragon":1952,
     "Snake":1953, "Horse":1954, "Goat":1955, "Monkey":1956, "Rooster":1957, "Dog":1958,"Pig":1959}
 
+    # extracting the year portion from the datetime from the user
+    date_year=user_date.year
 
+    while True:
+        # if date_year in zodiac_dict then loop over the dictionary.
+        if date_year in zodiac_dict.values():
+            for animal, date in zodiac_dict.items():
+
+                # if the date
+                if date == date_year:
+                    zodiac_animal = animal
+            break
+        else:
+            # if the date_year isn't in zodiac year, then decrease by 12
+            date_year = date_year - 12
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5000)
