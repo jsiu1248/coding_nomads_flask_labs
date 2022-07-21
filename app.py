@@ -60,7 +60,7 @@ def songs():
     page='<li> Memories</li> <strong> Another</strong>'
     return page
 
-@app.route('/zodiac')
+@app.route('/zodiac', methods=["GET", "POST"])
 def zodiac():
     form = NameForm()
     if form.validate_on_submit():
@@ -69,13 +69,11 @@ def zodiac():
         session['form_birthday']= form.form_birthday.data
         form.form_birthday.data=""
 
-        flash("hihi")
-    #     if form.form_birthday == date.datetime(1992,1,24):
-    #         flash("hihi")
-    #         #return form.dt.data.strftime('%Y-%m-%d')
+        flash("Your zodiac sign is " + zodiac_animal)
         return redirect(url_for('zodiac'))
 
-    return render_template('zodiac.html', form=form, name=session.get('name'), form_birthday=session.get('form_birthday'))
+    return render_template('zodiac.html', form=form, name=session.get('name'),
+    date_year=session.get('date_year'))
 
 def zodiac_year(user_date):
     """Find zodiac animal based on birth year.
