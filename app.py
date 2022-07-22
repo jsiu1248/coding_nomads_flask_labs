@@ -65,14 +65,17 @@ def zodiac():
     # creating form
     form = NameForm()
     if form.validate_on_submit():
+        # a session object is a dictionary object
+        # name is a session variable and setting it equal to the form's name's data.
         session['name']= form.name.data
+        # date is a session variable and setting it equal to the form's birthday data
         session['date']=form.birthday.data
         form_date=session['date']
+        # new variable for storing animal name
         zodiac_animal = zodiac_year(form_date)
-
-        flash("Your zodiac sign is " + zodiac_animal)
+        flash("Your zodiac sign is "+zodiac_animal)
         return redirect(url_for('zodiac'))
-
+    #
     return render_template('zodiac.html', form=form, name=session.get('name'),
     date_year=session.get('date_year'))
 
@@ -85,7 +88,6 @@ def zodiac_year(user_date):
 
     # extracting the year portion from the datetime from the user
     date_year=user_date.year
-
     while True:
         # if date_year in zodiac_dict then loop over the dictionary.
         if date_year in zodiac_dict.values():
