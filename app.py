@@ -10,7 +10,7 @@ class NameForm(FlaskForm):
     # the validator is needed because a string is required
     name = StringField("What is your name?", validators=[DataRequired()])
     #stores as a datetime.date
-    form_birthday = DateField("What is your birthday?", format='%Y-%m-%d', validators=[DataRequired()])
+    birthday = DateField("What is your birthday?", format='%Y-%m-%d', validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
@@ -62,12 +62,13 @@ def songs():
 
 @app.route('/zodiac', methods=["GET", "POST"])
 def zodiac():
+    # creating form
     form = NameForm()
     if form.validate_on_submit():
         session['name']= form.name.data
-        form.name.data=""
-        session['form_birthday']= form.form_birthday.data
-        form.form_birthday.data=""
+        session['date']=form.birthday.data
+        form_date=session['date']
+        zodiac_animal = zodiac_year(form_date)
 
         flash("Your zodiac sign is " + zodiac_animal)
         return redirect(url_for('zodiac'))
@@ -97,7 +98,7 @@ def zodiac_year(user_date):
         else:
             # if the date_year isn't in zodiac year, then decrease by 12
             date_year = date_year - 12
-
+    return zodiac_animal
 
 @app.route('/song')
 def song():
