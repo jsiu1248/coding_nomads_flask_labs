@@ -64,6 +64,7 @@ def songs():
 def zodiac():
     # creating form
     form = NameForm()
+    print(f'xx {form.validate_on_submit()}')
     if form.validate_on_submit():
         # a session object is a dictionary object
         # name is a session variable and setting it equal to the form's name's data.
@@ -171,4 +172,4 @@ def internal_server_error(e):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5001)
