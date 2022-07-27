@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, PasswordField, BooleanField
 from wtforms.fields import EmailField
 from wtforms.validators import DataRequired, Length, Email, ValidationError
+from sqlalchemy.exc import IntegrityError
 
 def length_check(form,field):
     if len(field.data) == 0:
