@@ -67,12 +67,23 @@ def update_post(pid, post_owner):
 def signup():
     signupform = SignUpForm(request.form)
     if request.method == 'POST':
-        reg = User(signupform.firstname.data, signupform.lastname.data,\
-         signupform.username.data, signupform.password.data,\
-         signupform.email.data)
-        db.session.add(reg)
-        db.session.commit()
-        return redirect(url_for('index'))
+        # filtering the user_name and email
+        user_name_check=User.query.filter_by(username=signupform.username.data).first()
+        email_check=User.query.filter_by(email=signupform.email.data).first()
+
+        # check to see if username and email is in database
+        if user_name_check is None and email_check is None:
+
+            reg = User(signupform.firstname.data, signupform.lastname.data,\
+            signupform.username.data, signupform.password.data,\
+            signupform.email.data)
+            db.session.add(reg)
+            db.session.commit()
+            return redirect(url_for('index'))
+
+        else:
+            # showing message when the username or email exists already
+            flash("Sorry. The username or email has been taken.")
     return render_template('signup.html', signupform=signupform)
 
 

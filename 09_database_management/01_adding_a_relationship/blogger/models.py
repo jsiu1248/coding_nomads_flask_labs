@@ -9,6 +9,8 @@ db = SQLAlchemy(app)
 def make_shell_context():
     return dict(db=db, User=User, Post=Post)
 
+# the import becomes blogger.models import db because of the blogger package
+
 class User(db.Model):
     __tablename__ = 'users'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
