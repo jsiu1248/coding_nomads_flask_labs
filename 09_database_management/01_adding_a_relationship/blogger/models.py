@@ -4,7 +4,7 @@ from blogger import app
 
 db = SQLAlchemy(app)
 
-
+# this allows the db not to be imported everytime
 @app.shell_context_processor
 def make_shell_context():
     return dict(db=db, User=User, Post=Post)
