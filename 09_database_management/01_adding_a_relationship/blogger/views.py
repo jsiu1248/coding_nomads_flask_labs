@@ -15,8 +15,8 @@ def index():
 def show_posts():
     if session['user_available']:
         posts = Post.query.all()
-        user = User.query.all()
-        return render_template('posts.html', posts=posts, user=user)
+        users = User.query.all()
+        return render_template('posts.html', posts=posts, user=users)
     flash('User is not Authenticated')
     return redirect(url_for('index'))
 

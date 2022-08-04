@@ -4,6 +4,10 @@ from blogger import app
 
 db = SQLAlchemy(app)
 
+"""
+This webapp acts like a tumbler. Everyone can read all of the posts after logging in. 
+"""
+
 # this allows the db not to be imported everytime
 @app.shell_context_processor
 def make_shell_context():
@@ -20,7 +24,7 @@ class User(db.Model):
     password = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True, index=True)
     dateofreg = db.Column(db.DateTime, default=datetime.datetime.now)
-    post_id = db.relationship('Post', backref='user', lazy='dynamic')
+    posts = db.relationship('Post', backref='user', lazy='dynamic')
 
     def __init__(self, firstname, lastname, username, password, email):
         self.firstname = firstname
