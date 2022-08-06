@@ -1,7 +1,7 @@
 from flask import Flask, request, session, redirect, url_for, render_template, flash, jsonify
 
-from . models import User, Post, db
-from . forms import AddPostForm, SignUpForm, SignInForm, AboutUserForm
+from .models import User, Post, db
+from .forms import AddPostForm, SignUpForm, SignInForm, AboutUserForm
 
 from blogger import app
 
@@ -14,7 +14,7 @@ def index():
 @app.route('/posts')
 def show_posts():
     if session['user_available']:
-        posts = Post.query.all()
+        posts = User.query.all()
         users = User.query.all()
         return render_template('posts.html', posts=posts, user=users)
     flash('User is not Authenticated')

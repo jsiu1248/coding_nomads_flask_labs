@@ -5,7 +5,7 @@ from blogger import app
 db = SQLAlchemy(app)
 
 """
-This webapp acts like a tumbler. Everyone can read all of the posts after logging in. 
+This webapp acts like a tumbler. Everyone can read all of the posts after logging in.
 """
 
 # this allows the db not to be imported everytime
@@ -40,11 +40,15 @@ class Post(db.Model):
     title = db.Column(db.String(100))
     description = db.Column(db.String(1000))
     puid = db.Column(db.Integer, db.ForeignKey('users.uid'))
+    # user_id = db.Column(db.Integer, db.ForeignKey('users.uid'))
+
 
     def __init__(self, title, description, puid):
         self.title = title
         self.description = description
         self.puid = puid
+        # self.user_id = user_id
+
 
 
 db.create_all()
