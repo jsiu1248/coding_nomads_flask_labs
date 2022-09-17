@@ -2,7 +2,7 @@ from flask import Flask, request, session, redirect, url_for, render_template, f
 
 from . models import User, Post, db
 from . forms import AddPostForm, SignUpForm, SignInForm, AboutUserForm
-
+from flask_login import login_user, logout_user, login_required
 from blogger import app
 
 

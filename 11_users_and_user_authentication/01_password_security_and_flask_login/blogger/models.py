@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from blogger import app
+from werkzeug.security import check_password_hash, generate_password_hash
 
 db = SQLAlchemy(app)
 
