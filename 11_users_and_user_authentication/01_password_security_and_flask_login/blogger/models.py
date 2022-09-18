@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-from blogger import app
+from blogger import app, login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
 
 db = SQLAlchemy(app)
@@ -17,12 +17,12 @@ class User(db.Model):
     dateofreg = db.Column(db.DateTime, default=datetime.datetime.now)
 
     # should password be take out of this? Can it be queried?
-    def __init__(self, firstname, lastname, username, password, email):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.username = username
-        self.password = password
-        self.email = email
+    # def __init__(self, firstname, lastname, username, password, email):
+    #     self.firstname = firstname
+    #     self.lastname = lastname
+    #     self.username = username
+    #     self.password = password
+    #     self.email = email
     
     # errors out when someone tries to read it
     @property
@@ -39,6 +39,12 @@ class User(db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    # login manager needs help with getting users
+    # LoginManager will call load_user() to find out info about users
+    # takes an id and returns the user
+    @login_manager.user_loader
+    def load_user(uid):
+        return User.query.get(int(uid))
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -47,10 +53,10 @@ class Post(db.Model):
     description = db.Column(db.String(1000))
     puid = db.Column(db.Integer, db.ForeignKey('users.uid'))
 
-    def __init__(self, title, description, puid):
-        self.title = title
-        self.description = description
-        self.puid = puid
+    # def __init__(self, title, description, puid):
+    #     self.title = title
+    #     self.description = description
+    #     self.puid = puid
 
 
 db.create_all()
