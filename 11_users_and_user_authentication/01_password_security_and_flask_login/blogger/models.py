@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(50))
     lastname = db.Column(db.String(50))
     username = db.Column(db.String(50), unique=True, index=True)
@@ -44,7 +44,7 @@ class User(UserMixin, db.Model):
     # LoginManager will call load_user() to find out info about users
     # takes an id and returns the user
     @login_manager.user_loader
-    def load_user(uid):
+    def load_user(id):
         return User.query.get(int(id))
 
 class Post(db.Model):
@@ -52,7 +52,7 @@ class Post(db.Model):
     pid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100))
     description = db.Column(db.String(1000))
-    puid = db.Column(db.Integer, db.ForeignKey('users.uid'))
+    puid = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     # def __init__(self, title, description, puid):
     #     self.title = title
