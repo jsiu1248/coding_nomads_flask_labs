@@ -2,7 +2,7 @@ from flask import Flask, request, session, redirect, url_for, render_template, f
 
 from . models import User, Post, db
 from . forms import AddPostForm, SignUpForm, SignInForm, AboutUserForm
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from blogger import app
 
 
@@ -13,7 +13,7 @@ def index():
 
 @app.route('/posts')
 def show_posts():
-    if session['user_available']:
+    if current_user.is_authenticated:
         posts = Post.query.all()
         user = User.query.all()
         return render_template('posts.html', posts=posts, user=user)
@@ -67,9 +67,9 @@ def update_post(pid, post_owner):
 def signup():
     signupform = SignUpForm(request.form)
     if request.method == 'POST':
-        reg = User(signupform.firstname.data, signupform.lastname.data,\
-         signupform.username.data, signupform.password.data,\
-         signupform.email.data)
+        reg = User(firstname = signupform.firstname.data, lastname = signupform.lastname.data,\
+         username = signupform.username.data, password = signupform.password.data,\
+         email = signupform.email.data)
         db.session.add(reg)
         db.session.commit()
         return redirect(url_for('index'))
@@ -79,14 +79,32 @@ def signup():
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     signinform = SignInForm()
+
     if request.method == 'POST':
-        em = signinform.email.data
-        log = User.query.filter_by(email=em).first()
-        if log.password == signinform.password.data:
-            current_user = log.username
-            session['current_user'] = current_user
-            session['user_available'] = True
-            return redirect(url_for('show_posts'))
+        # if form.validate_on_submit():
+        email_entered = signinform.email.data
+        password_entered = signinform.password.data
+
+        user = User.query.filter_by(email=email_entered).first()
+
+        # make sure that user is not None or it would error
+        if user and user.verify_password(password_entered):
+            login_user(user, remember = signinform.remember_me.data)
+
+            next = request.args.get('next')
+            if next is None or not next.startswith('/'):
+                # if signs in successfully then show posts
+                next = url_for('show_posts')
+            return redirect(next)
+            # flash a message that username/password is invalid
+        flash("The username/password is invalid")
+
+
+
+            # current_user = user.username
+            # session['current_user'] = current_user
+            # session['user_available'] = True
+            # return redirect(url_for('show_posts'))
     return render_template('signin.html', signinform=signinform)
 
 

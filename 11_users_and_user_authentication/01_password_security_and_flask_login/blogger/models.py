@@ -2,11 +2,12 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 from blogger import app, login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import UserMixin
 
 db = SQLAlchemy(app)
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(50))
@@ -44,7 +45,7 @@ class User(db.Model):
     # takes an id and returns the user
     @login_manager.user_loader
     def load_user(uid):
-        return User.query.get(int(uid))
+        return User.query.get(int(id))
 
 class Post(db.Model):
     __tablename__ = 'posts'
