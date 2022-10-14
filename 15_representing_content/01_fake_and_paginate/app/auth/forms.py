@@ -3,25 +3,25 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms import ValidationError
-from wtforms.validators import Required, Length, Email, Regexp, EqualTo
+from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
 
 from app.models import User
 
 
 class LoginForm(FlaskForm):
     email_or_username = StringField(
-        "Email or Username", validators=[Required(), Length(1, 64)]
+        "Email or Username", validators=[DataRequired(), Length(1, 64)]
     )
-    password = PasswordField("Password", validators=[Required()])
+    password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Log In")
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField("Email", validators=[Required(), Length(1, 64), Email()])
+    email = StringField("Email", validators=[DataRequired(), Length(1, 64), Email()])
     username = StringField(
         "Username",
         validators=[
-            Required(),
+            DataRequired(),
             Length(1, 64),
             Regexp(
                 "^[A-Za-z][A-Za-z0-9_.]*$",
@@ -33,11 +33,11 @@ class RegistrationForm(FlaskForm):
     password = PasswordField(
         "Password",
         validators=[
-            Required(),
+            DataRequired(),
             EqualTo("password_confirmation", message="Passwords must match."),
         ],
     )
-    password_confirmation = PasswordField("Confirm password", validators=[Required()])
+    password_confirmation = PasswordField("Confirm password", validators=[DataRequired()])
     submit = SubmitField("Register")
 
     def validate_email(self, field):
