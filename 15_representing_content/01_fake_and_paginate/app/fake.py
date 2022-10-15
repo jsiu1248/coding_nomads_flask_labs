@@ -7,6 +7,7 @@ import string
 
 def users(count=10):
     fake = Faker()
+    i=0
     while i < count:
         u = User(username=fake.user_name(),
                  email = fake.email(),
