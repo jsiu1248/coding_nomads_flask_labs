@@ -34,7 +34,7 @@ def todolists(count = 75):
         # so it is picking a random user and don't care about duplicated users because users can have multiple compositions
         u = User.query.offset(randint(0, user_count - 1)).first()
         t = TodoList(title = string.capwords(fake.bs()),
-                    create_at = fake.past_date(), 
+                    created_at = fake.past_date(), 
                     creator = u)
         db.session.add(t)
     db.session.commit()
@@ -45,8 +45,8 @@ def todos(count = randint(5,75)):
     for i in range(count):
         u = User.query.offset(randint(0, user_count - 1)).first()
         task = Todo(description =fake.text(), 
-            created_at = fake.past_data(),
-            finished_at= fake.past_data(), 
+            created_at = fake.past_date(),
+            finished_at= fake.past_date(), 
             is_finished= choices([True, False], [0.5, 0.5]), 
             creator= u)
         db.session.add(task)
